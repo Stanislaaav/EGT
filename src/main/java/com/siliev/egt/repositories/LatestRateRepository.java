@@ -16,6 +16,9 @@ public interface LatestRateRepository extends JpaRepository<LatestRateEntity, Lo
         + "DESC LIMIT 1", nativeQuery = true)
     LatestRateEntity findLatest();
 
-    @Query(value = "SELECT pk_request_id, client, service_name, \"timestamp\" FROM public.unified_statistical_information WHERE \"timestamp\" >= NOW() - INTERVAL '1 HOURS' ORDER BY pk_request_id DESC", nativeQuery = true)
+    //TODO not working
+    @Query(value = "SELECT pk_request_id, client, service_name, \"timestamp\" "
+        + "FROM public.unified_statistical_information WHERE \"timestamp\" >= NOW() - INTERVAL '1 HOURS' "
+        + "ORDER BY pk_request_id DESC", nativeQuery = true)
     List<LatestRateEntity> getHistory(String timeInterval);
 }
