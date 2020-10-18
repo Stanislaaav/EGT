@@ -4,6 +4,8 @@ package com.siliev.egt.controllers;
 import com.siliev.egt.dto.LatestRateDto;
 import com.siliev.egt.dto.xml.CurrentXmlDto;
 import com.siliev.egt.dto.xml.HistoryXmlDto;
+import com.siliev.egt.entities.StatisiticCollectorEntity;
+import java.util.List;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,5 +19,5 @@ public interface XmlController {
     ResponseEntity<LatestRateDto> getCurrent(@RequestBody CurrentXmlDto currentXmlDto);
 
     @PostMapping(value = "/history", consumes = MediaType.APPLICATION_XML_VALUE, produces = MediaType.APPLICATION_XML_VALUE)
-    ResponseEntity<LatestRateDto> getHistory(@RequestBody HistoryXmlDto historyXmlDto);
+    ResponseEntity<List<StatisiticCollectorEntity>>  getHistory(@RequestBody HistoryXmlDto historyXmlDto);
 }

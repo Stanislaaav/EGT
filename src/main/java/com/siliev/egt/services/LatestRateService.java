@@ -12,5 +12,4 @@ public interface LatestRateService {
 
     LatestRateDto getCurrencyExchangeRate();
 
-    List<LatestRateEntity> getHistory(String timeInterval);
 }

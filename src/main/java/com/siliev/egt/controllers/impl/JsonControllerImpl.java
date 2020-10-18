@@ -4,7 +4,7 @@ import com.siliev.egt.controllers.JsonController;
 import com.siliev.egt.dto.LatestRateDto;
 import com.siliev.egt.dto.json.CurrentDto;
 import com.siliev.egt.dto.json.HistoryDto;
-import com.siliev.egt.entities.LatestRateEntity;
+import com.siliev.egt.entities.StatisiticCollectorEntity;
 import com.siliev.egt.services.LatestRateService;
 import com.siliev.egt.services.StatisticCollectorServiceService;
 import com.siliev.egt.services.impl.StatisticCollectorServiceImpl;
@@ -42,9 +42,8 @@ public class JsonControllerImpl implements JsonController {
         return ResponseEntity.ok().body(latestRateService.findLatest());
     }
 
-    //TODO the response is not ritgh have to deal with utc datetime
     @Override
-    public ResponseEntity<LatestRateDto> getHistory(@RequestBody HistoryDto historyDto) {
+    public ResponseEntity<List<StatisiticCollectorEntity>> getHistory(@RequestBody HistoryDto historyDto) {
 
         if (statisticCollectorService.findById((historyDto.getRequestId())).isPresent()) {
             throw new IllegalArgumentException("Request with the same id already exist.");
@@ -55,9 +54,7 @@ public class JsonControllerImpl implements JsonController {
 
         String timeInterval = String.format("%d HOURS", historyDto.getPeriod());
 
-        //return ResponseEntity.ok().body(latestRateService.getHistory(timeInterval));
-
-        return ResponseEntity.ok().body(latestRateService.findLatest());
+        return ResponseEntity.ok().body(statisticCollectorService.getHistory(timeInterval));
     }
 
 }

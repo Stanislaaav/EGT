@@ -1,6 +1,6 @@
 package com.siliev.egt.services.impl;
 
-import com.siliev.egt.dto.UnifiedStatisticalInformationDto;
+import com.siliev.egt.dto.StatisticCollectorDto;
 import com.siliev.egt.dto.json.CurrentDto;
 import com.siliev.egt.dto.json.HistoryDto;
 import com.siliev.egt.dto.xml.CurrentXmlDto;
@@ -9,6 +9,7 @@ import com.siliev.egt.entities.StatisiticCollectorEntity;
 import com.siliev.egt.repositories.StatisticCollectorServiceRepository;
 import com.siliev.egt.services.EventService;
 import com.siliev.egt.services.StatisticCollectorServiceService;
+import java.util.List;
 import java.util.Optional;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -28,37 +29,42 @@ public class StatisticCollectorServiceImpl implements StatisticCollectorServiceS
     }
 
     @Override
-    public UnifiedStatisticalInformationDto saveCurrent(CurrentDto dto) {
+    public StatisticCollectorDto saveCurrent(CurrentDto dto) {
         StatisiticCollectorEntity entity =
             statisticCollectorServiceRepository.save(modelMapper.map(dto, StatisiticCollectorEntity.class));
         eventService.sendMessageToBroker(entity);
-        return modelMapper.map(entity, UnifiedStatisticalInformationDto.class);
+        return modelMapper.map(entity, StatisticCollectorDto.class);
     }
 
     @Override
-    public UnifiedStatisticalInformationDto saveCurrent(CurrentXmlDto dto) {
+    public StatisticCollectorDto saveCurrent(CurrentXmlDto dto) {
         StatisiticCollectorEntity entity = modelMapper.map(dto, StatisiticCollectorEntity.class);
         entity.populateFiled(dto);
         statisticCollectorServiceRepository.save(entity);
         eventService.sendMessageToBroker(entity);
-        return modelMapper.map(entity, UnifiedStatisticalInformationDto.class);
+        return modelMapper.map(entity, StatisticCollectorDto.class);
     }
 
     @Override
-    public UnifiedStatisticalInformationDto saveHistory(HistoryDto dto) {
+    public StatisticCollectorDto saveHistory(HistoryDto dto) {
         StatisiticCollectorEntity entity = modelMapper.map(dto, StatisiticCollectorEntity.class);
         statisticCollectorServiceRepository.save(entity);
         eventService.sendMessageToBroker(entity);
-        return modelMapper.map(entity, UnifiedStatisticalInformationDto.class);
+        return modelMapper.map(entity, StatisticCollectorDto.class);
     }
 
     @Override
-    public UnifiedStatisticalInformationDto saveHistory(HistoryXmlDto dto) {
+    public StatisticCollectorDto saveHistory(HistoryXmlDto dto) {
         StatisiticCollectorEntity entity = modelMapper.map(dto, StatisiticCollectorEntity.class);
         entity.populateFiled(dto);
         statisticCollectorServiceRepository.save(entity);
         eventService.sendMessageToBroker(entity);
-        return modelMapper.map(entity, UnifiedStatisticalInformationDto.class);
+        return modelMapper.map(entity, StatisticCollectorDto.class);
+    }
+
+    @Override
+    public List<StatisiticCollectorEntity> getHistory(String timeInterval) {
+        return statisticCollectorServiceRepository.findAll();
     }
 
     @Override

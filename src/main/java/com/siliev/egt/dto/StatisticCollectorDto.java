@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UnifiedStatisticalInformationDto {
+public class StatisticCollectorDto {
 
     private String requestId;
     private Long timestamp;

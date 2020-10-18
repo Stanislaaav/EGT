@@ -4,7 +4,6 @@ import com.siliev.egt.dto.LatestRateDto;
 import com.siliev.egt.entities.LatestRateEntity;
 import com.siliev.egt.repositories.LatestRateRepository;
 import com.siliev.egt.services.LatestRateService;
-import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -34,17 +33,6 @@ public class LatestRateServiceImpl implements LatestRateService {
     }
 
     @Override
-    public List<LatestRateEntity> getHistory(String timeInterval) {
-
-        //TODO to check mapper doesn work properly
-//        return latestRateEntities.stream()
-//            .map(entity -> modelMapper.map(entity, LatestRateDto.class))
-//            .collect(Collectors.toList());
-
-        return latestRateRepository.getHistory(timeInterval);
-    }
-
-    @Override
     public LatestRateDto findLatest() {
         return modelMapper.map(latestRateRepository.findLatest(), LatestRateDto.class);
     }
@@ -54,6 +42,5 @@ public class LatestRateServiceImpl implements LatestRateService {
         LatestRateEntity latestRateEntity = latestRateRepository.save(modelMapper.map(latestRateDto, LatestRateEntity.class));
         return modelMapper.map(latestRateEntity, LatestRateDto.class);
     }
-
 
 }
