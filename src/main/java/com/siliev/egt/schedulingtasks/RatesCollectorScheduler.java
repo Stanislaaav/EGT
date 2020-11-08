@@ -22,6 +22,6 @@ public class RatesCollectorScheduler {
     @Scheduled(fixedRate = 7200000) //every two hours
     public void reportCurrentTime() {
         log.info("The time is now {}", dateFormat.format(new Date()));
-        latestRateService.save(latestRateService.getCurrencyExchangeRate());
+      //  latestRateService.save(latestRateService.getCurrencyExchangeRate());
     }
 }

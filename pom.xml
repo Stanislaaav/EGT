@@ -16,6 +16,8 @@
 
   <properties>
     <java.version>11</java.version>
+    <testcontainers.version>1.14.3</testcontainers.version>
+    <easy-random-core.version>4.2.0</easy-random-core.version>
   </properties>
 
   <dependencies>
@@ -35,12 +37,6 @@
       <artifactId>postgresql</artifactId>
       <scope>runtime</scope>
     </dependency>
-
-    <!-- <dependency>
-       <groupId>com.h2database</groupId>
-       <artifactId>h2</artifactId>
-       <scope>runtime</scope>
-   </dependency>-->
 
     <!-- modelmapper -->
     <dependency>
@@ -80,6 +76,39 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-cache</artifactId>
+    </dependency>
+
+    <!-- testcon*  -->
+    <dependency>
+      <groupId>org.testcontainers</groupId>
+      <artifactId>testcontainers</artifactId>
+      <version>${testcontainers.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.testcontainers</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>${testcontainers.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.testcontainers</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>${testcontainers.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+
+    <!-- easy-random-core -->
+    <dependency>
+      <groupId>org.jeasy</groupId>
+      <artifactId>easy-random-core</artifactId>
+      <version>${easy-random-core.version}</version>
+      <scope>test</scope>
     </dependency>
 
     <dependency>

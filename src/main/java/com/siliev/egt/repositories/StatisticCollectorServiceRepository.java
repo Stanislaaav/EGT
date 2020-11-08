@@ -9,10 +9,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface StatisticCollectorServiceRepository extends JpaRepository<StatisiticCollectorEntity, String> {
 
-    //    //TODO not working
+    //TODO not working
     @Query(value = "SELECT *\n"
         + "FROM public.statistic_collectors\n"
         + "WHERE \"timestamp\" >= NOW() - INTERVAL ?1\n"
         + "ORDER BY \"timestamp\" DESC", nativeQuery = true)
-    List<StatisiticCollectorEntity> getHistory();
+    List<StatisiticCollectorEntity> getHistory(String interval);
 }
