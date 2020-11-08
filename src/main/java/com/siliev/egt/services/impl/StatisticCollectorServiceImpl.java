@@ -12,9 +12,12 @@ import com.siliev.egt.services.StatisticCollectorServiceService;
 import java.util.List;
 import java.util.Optional;
 import org.modelmapper.ModelMapper;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 @Service
+@CacheConfig(cacheNames = "StatisiticCollector")
 public class StatisticCollectorServiceImpl implements StatisticCollectorServiceService {
 
     private final StatisticCollectorServiceRepository statisticCollectorServiceRepository;
@@ -69,7 +72,8 @@ public class StatisticCollectorServiceImpl implements StatisticCollectorServiceS
 
     @Override
     //TODO to check why it doesnt work
-    //@Cacheable(value = "currency", key="#timestamp")  //value - the name of the cache, key - name of the key
+    //@Cacheable(value = "StatisiticCollector", key="#requestId")  //value - the name of the cache, key - name of the key
+    //@Cacheable(value = "StatisiticCollectors", key="#requestId",condition="#requestId!=null")  //value - the name of the cache, key - name of the key
     public Optional<StatisiticCollectorEntity> findById(String id) {
         return statisticCollectorServiceRepository.findById(id);
     }
